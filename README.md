@@ -24,7 +24,7 @@
 
 ### Задание 1
 
-![Задание 1](https://github.com/StanislavIskorostenskiy/zabbix/blob/main/Задание%201.png)
+![Задание 1](https://github.com/StanislavIskorostenskiy/zabbix/blob/main/Задание1.png)
 
 
 ### Задание 2
@@ -95,3 +95,16 @@
 
 `При необходимости прикрепитe сюда скриншоты
 ![Название скриншота](ссылка на скриншот)`
+
+
+
+
+docker run -d --name iskorostenskiys-1 \
+  --network zabbix_default \
+  -e ZBX_SERVER_HOST=zabbix_zabbix-server_1 \
+  zabbix/zabbix-agent:alpine-6.4-latest
+
+docker run -d --name iskorostenskiys-2 \
+  --network zabbix_default \
+  -e ZBX_SERVER_HOST=zabbix_zabbix-server_1 \
+  zabbix/zabbix-agent:alpine-6.4-latest
