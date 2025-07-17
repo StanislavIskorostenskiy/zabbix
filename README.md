@@ -24,6 +24,7 @@
 
 ### Задание 1
 
+![Задание 1](https://github.com/StanislavIskorostenskiy/zabbix/blob/main/Задание%201.png)
 
 
 ### Задание 2
