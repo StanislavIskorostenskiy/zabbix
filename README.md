@@ -23,27 +23,51 @@
 ---
 
 ### Задание 1
+   Создайте свой шаблон, в котором будут элементы данных, мониторящие загрузку CPU и RAM хоста.
 
-![Задание 1](https://github.com/StanislavIskorostenskiy/zabbix/blob/main/Задание1.png)
+   Выполняя ДЗ сверяйтесь с процессом отражённым в записи лекции.
+   В веб-интерфейсе Zabbix Servera в разделе Templates создайте новый шаблон
+   Создайте Item который будет собирать информацию об загрузке CPU в процентах
+   Создайте Item который будет собирать информацию об загрузке RAM в процентах
+
+   ![Задание 1. скрин созданного templates](https://github.com/StanislavIskorostenskiy/zabbix/blob/main/Задание1.png)
+   ![Задание 1. собирается нужная  метрика  в % ](https://github.com/StanislavIskorostenskiy/zabbix/blob/main/Задание1.1.png)
+
 
 
 ### Задание 2-3
+   Добавьте в Zabbix два хоста и задайте им имена <фамилия и инициалы-1> и <фамилия и инициалы-2>. Например: ivanovii-1 и ivanovii-2.
 
-![Задание 2-3](https://github.com/StanislavIskorostenskiy/zabbix/blob/main/Задание2-3.png)
+   Выполняя ДЗ сверяйтесь с процессом отражённым в записи лекции.
+   Установите Zabbix Agent на 2 виртмашины, одной из них может быть ваш Zabbix Server
+   Добавьте Zabbix Server в список разрешенных серверов ваших Zabbix Agentов
+   Добавьте Zabbix Agentов в раздел Configuration > Hosts вашего Zabbix Servera
+   Прикрепите за каждым хостом шаблон Linux by Zabbix Agent
+   Проверьте что в разделе Latest Data начали появляться данные с добавленных агентов
+
+   ![Задание 2-3. 2 машины iskorostenskiy1/iskorostenskiy2 ](https://github.com/StanislavIskorostenskiy/zabbix/blob/main/Задание2-3.png)
+   ![Задание 2-3. Показал на примере iskorostenskiy1 состояние zabbix_agentd.conf ](https://github.com/StanislavIskorostenskiy/zabbix/blob/main/Задание2-3.1.png)
+   ![Задание 2-3. Latest Data ](https://github.com/StanislavIskorostenskiy/zabbix/blob/main/Задание2-3.2.png)
+
+   ## Комментарии 
+   Пункт 3. Так же к каждому хосту привяжите шаблон Linux by Zabbix Agent
+   В моем кастомном шаблоне содержатся system.cpu.util[,user] 	 vm.memory.size[pavailable]. Они так же содержаться в Linux by Zabbix Agent, поэтому zabbix не дает мне одновременно подключить эти два шаблона. Оставил свой кастомный
+   ## При развертывании контейнеров сразу пробрасываю ZBX_SERVER_HOST=zabbix_zabbix-server_1
+      docker run -d --name iskorostenskiys-1 \
+   --network zabbix_default \
+   -e ZBX_SERVER_HOST=zabbix_zabbix-server_1 \
+   zabbix/zabbix-agent:alpine-6.4-latest
+
+   docker run -d --name iskorostenskiys-2 \
+   --network zabbix_default \
+   -e ZBX_SERVER_HOST=zabbix_zabbix-server_1 \
+   zabbix/zabbix-agent:alpine-6.4-latest
 
 
 ### Задание 4
 
-![Задание 4](https://github.com/StanislavIskorostenskiy/zabbix/blob/main/Задание4.png)
+![Задание 4 Создал свой dshrd, разместил несколько графиков](https://github.com/StanislavIskorostenskiy/zabbix/blob/main/Задание4.png)
 
 ### Доп инфо
 
-docker run -d --name iskorostenskiys-1 \
-  --network zabbix_default \
-  -e ZBX_SERVER_HOST=zabbix_zabbix-server_1 \
-  zabbix/zabbix-agent:alpine-6.4-latest
 
-docker run -d --name iskorostenskiys-2 \
-  --network zabbix_default \
-  -e ZBX_SERVER_HOST=zabbix_zabbix-server_1 \
-  zabbix/zabbix-agent:alpine-6.4-latest
